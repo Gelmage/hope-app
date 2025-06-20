@@ -501,12 +501,20 @@
 
           const showVirtualHug = () => {
             setShowHug(true);
-            setTimeout(() => setShowHug(false), 3000); // Hug animation visible for 3 seconds
+            
+            if (soundEnabled) {
+              // Assuming your sound file is directly in the root of your GitHub Pages repo
+              // REPLACE 'YOUR_SOUND_FILE_NAME.mp3' with the actual name of your sound file
+              const hugSound = new Audio('https://gelmage.github.io/hope-app/click.mp3'); 
+              hugSound.play().catch(e => console.error("Sound playback failed:", e)); 
+            }
+
+            setTimeout(() => setShowHug(false), 3000); 
             if (!achievements.hugGiver) {
               setAchievements(prev => ({ ...prev, hugGiver: true }));
             }
           };
-
+    
           const recordMood = (mood) => {
             setTodaysMood(mood);
             if (!achievements.moodTracker) {
